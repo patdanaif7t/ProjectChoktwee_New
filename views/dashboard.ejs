@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>ดูรายงาน</title>
+  <link rel="shortcut icon" type="image/png" href="http://www.bhwelder.com.my/img/hotproduct.png" />
+  <!-- Main CSS-->
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <!-- Font-icon css-->
+  <link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+
+
+<body class="app sidebar-mini rtl">
+  <!-- Navbar-->
+  <header class="app-header"><a class="app-header__logo" href="#">Choktwee</a>
+    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
+      aria-label="Hide Sidebar"></a>
+    <!-- Navbar Right Menu-->
+    <ul class="app-nav">
+      <!-- <li class="app-search">
+                <input class="app-search__input" type="search" placeholder="Search">
+                <button class="app-search__button"><i class="fa fa-search"></i></button>
+            </li> -->
+
+      <!-- User Menu-->
+      <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i
+            class="fa fa-user fa-lg"></i></a>
+        <ul class="dropdown-menu settings-menu dropdown-menu-right">
+          <!-- <li><a class="dropdown-item" href="#"><i class="fa fa-cog fa-lg"></i> Settings</a></li>
+                    <li><a class="dropdown-item" href="#"><i class="fa fa-user fa-lg"></i> Profile</a></li> -->
+          <li><a class="dropdown-item" href="login"><i class="fa fa-sign-out fa-lg"></i> ออกจากระบบ</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </header>
+  <!-- Sidebar menu-->
+  <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+  <aside class="app-sidebar">
+    <div class="app-sidebar__user">
+      <p class="app-sidebar__user-name" id="profilename">ภัทรดนัย ช่างเหลา</p>
+
+    </div>
+    <ul class="app-menu">
+
+      <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+            class="app-menu__icon fa fa-car"></i><span class="app-menu__label">จัดการสต็อกรถ</span><i
+            class="treeview-indicator fa fa-angle-right"></i></a>
+        <ul class="treeview-menu">
+          <li><a class="treeview-item" href="/mangecar"><i class="icon fa fa-circle-o"></i>
+              สต็อกรถ</a></li>
+          <li><a class="treeview-item" href="/buycar" rel="noopener"><i class="icon fa fa-circle-o"></i>
+              ซื้อรถเข้า</a></li>
+          <li><a class="treeview-item" href="/sellcar"><i class="icon fa fa-circle-o"></i>ขายรถ</a></li>
+        </ul>
+      </li>
+      <li><a class="app-menu__item" href="/manage-repair"><i class="app-menu__icon fa fa-wrench"></i><span
+            class="app-menu__label">จัดการซ่อม</span></a></li>
+      <li><a class="app-menu__item" href="/renewlicense"><i class="app-menu__icon fa fa-file-pdf-o"></i><span
+            class="app-menu__label">จัดการเดินทะเบียน</span></a></li>
+      <li><a class="app-menu__item" href="/customer"><i class="app-menu__icon fa fa-handshake-o"></i><span
+            class="app-menu__label">ดูข้อมูลลูกค้า</span></a></li>
+      <!-- <li><a class="app-menu__item" href="/report"><i class="app-menu__icon fa fa-pie-chart"></i><span
+                        class="app-menu__label">ดูรายงาน</span></a></li> -->
+      <li id="dash"><a class="app-menu__item active" href="/dashboard"><i class="app-menu__icon fa fa-dashboard"></i><span
+            class="app-menu__label">ดูรายงาน</span></a></li>
+      <li id="manemp"><a class="app-menu__item" href="/mangeemployee"><i class="app-menu__icon fa fa-users"></i><span
+            class="app-menu__label">จัดการพนักงาน</span></a></li>
+    </ul>
+  </aside>
+  <main class="app-content">
+    <div class="app-title">
+      <div>
+        <h1><i class="fa fa-dashboard"></i> ดูรายงาน</h1>
+        <p>รายงานแสดงรายได้และภาพรวมต่างๆในระบบ</p>
+      </div>
+      <!-- <ul class="app-breadcrumb breadcrumb">
+        <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+      </ul> -->
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-lg-3">
+        <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
+          <div class="info">
+            <h4>พนักงาน</h4>
+            <p><b><%= emps.length %></b></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="widget-small info coloured-icon"><i class="icon fa fa-user fa-5x"></i>
+          <div class="info">
+            <h4>ลูกค้า</h4>
+            <p><b><%= cus.length %></b></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="widget-small warning coloured-icon"><i class="icon fa fa-car fa-5x"></i>
+          <div class="info">
+            <h4>รถในระบบ</h4>
+            <p><b><%= cars.length %></b></p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-3">
+        <div class="widget-small primary coloured-icon"><i class="icon fa fa-line-chart fa-3x"></i>
+          <div class="info">
+            <h4>เคสสรอซ่อม</h4>
+            
+            <p><b ><%= repair_status.length %></b></p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-6 col-lg-3">
+        <div class="widget-small warning coloured-icon"><i class="icon fa fa-line-chart fa-3x"></i>
+          <div class="info">
+            <h4>รายได้ซ่อมรถ</h4>
+            <p><b id="sumrepair">จำนวนรายได้ซ่อมรถ</b></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="widget-small danger coloured-icon"><i class="icon fa fa-line-chart fa-3x"></i>
+          <div class="info">
+            <h4>รายได้เดินทะเบียน</h4>
+            <p><b id="sumlicense">จำนวนรายได้เดินทะเบียน</b></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+          <div class="widget-small primary coloured-icon"><i class="icon fa fa-line-chart fa-3x"></i>
+            <div class="info">
+              <h4>รายได้ขายรถ</h4>
+              <p><b id="sumsellcar">จำนวนยอดขาย</b></p>
+  
+            </div>
+          </div>
+        </div>
+      
+    </div>
+
+    
+
+
+
+  </main>
+  <!-- Essential javascripts for application to work-->
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+  <!-- The javascript plugin to display page loading on top-->
+  <script src="js/plugins/pace.min.js"></script>
+  <!-- Page specific javascripts-->
+  <script type="text/javascript" src="js/plugins/chart.js"></script>
+  <script type="text/javascript">
+  //  feedstatus('<%= status %>')
+
+     $('#profilename').text("ยินดีต้อนรับคุณ : " + localStorage.getItem("name"));
+
+  //   var userstatus = localStorage.getItem("status")
+
+  //   if (userstatus === "แอดมิน") {
+  //     console.log('เข้าแอดมิน');
+  //   } else {
+  //     document.getElementById("manemp").children[0].style.display = "none"
+  //     document.getElementById("dash").children[0].style.display = "none"
+  //     console.log('ไม่เข้าแอดมิน');
+  //   }
+
+    var sumsellcar = 0
+    var sumrepair = 0
+    var sumlicense = 0
+
+    <% for(var i=0; i < sellCars.length; i++) { %>
+      sumsellcar+= <%= sellCars[i].sell_car_price %>
+      <%}%>
+      <% for(var i=0; i < repairs.length; i++) { %>
+        sumrepair+= <%= repairs[i].repairCost %>
+      <%}%>
+      <% for(var i=0; i < licenses.length; i++) { %>
+        sumlicense+= <%= licenses[i].renew_license_price %>
+      <%}%>
+
+      $('#sumsellcar').text(sumsellcar.toLocaleString('en'))
+    $('#sumrepair').text(sumrepair.toLocaleString('en'))
+    $('#sumlicense').text(sumlicense.toLocaleString('en'))
+    // console.log(sum);
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/png" href="http://www.bhwelder.com.my/img/hotproduct.png" />
+  <!-- Main CSS-->
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <!-- Font-icon css-->
+  <link rel="stylesheet" type="text/css"
+    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>โชคทวีออโต้เซลส์</title>
+</head>
+
+<body>
+  <section class="material-half-bg">
+    <div class="cover"></div>
+  </section>
+  <section class="login-content">
+    <div class="logo">
+      <!-- <img src="https://www.img.in.th/images/2eea36b3d0670dc321ffca24755f5b8a.png" width="1300" height="400"> -->
+      <img src="image/logo.png" alt="" width="1200" height="300">
+    </div>
+    <div class="login-box">
+      <form class="login-form" action="/login" method="post">
+        <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>เข้าสู่ระบบ</h3>
+        <div class="form-group">
+          <label class="control-label">ชื่อผู้ใช้งาน</label>
+          <input type="input" id="username" name="username" class="form-control" type="text" placeholder="ชื่อผู้ใช้งาน" autofocus>
+        </div>
+        <div class="form-group">
+          <label class="control-label">รหัสผ่าน</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="รหัสผ่าน">
+        </div>
+        <div class="form-group">
+          <div class="utility">
+            <div class="animated-checkbox">
+              <!-- <label>
+                <input type="checkbox"><span class="label-text">Stay Signed in</span>
+              </label> -->
+            </div>
+            <p class="semibold-text mb-2"><a href="#" data-toggle="flip">ลืมรหัสผ่าน ?</a></p>
+          </div>
+        </div>
+        <div class="form-group btn-container">
+          <button href="#" type="submit" class="btn btn-primary btn-block" onclick="setname_status()">เข้าสู่ระบบ</button>
+        </div>
+      </form>
+
+
+
+
+
+      <div class="forget-form">
+        <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>ลืมรหัสผ่าน ?</h3>
+        <div class="form-group">
+          <label class="control-label">หมายเลขประจำตัวประชาชน</label>
+          <input type="input" name="employee_citizen_id" id="citizen" class="form-control" type="text"
+            placeholder="หมายเลขประจำตัวประชาชน">
+
+          <label style="margin-top: 4.99px" class="control-label">ชื่อผู้ใช้งาน</label>
+          <input type="input" name="username" id="resetusername" class="form-control" type="text"
+          placeholder="ชื่อผู้ใช้งาน">
+        </div>
+        <div class="form-group btn-container">
+          <button class="btn btn-primary btn-block" onclick="resetPassword()"><i
+              class="fa fa-unlock fa-lg fa-fw"></i>ค้นหา</button>
+        </div>
+        <div class="form-group">
+          <label class="control-label">รหัสผ่านของคุณ</label>
+          <input type="text" id="resetpassword" name="password" class="form-control" placeholder="รหัสผ่าน">
+        </div>
+        <div class="form-group mt-3">
+          <a href="/login"><button class="btn btn-primary btn-block"><i class=" fa fa-unlock fa-lg fa-fw"></i>เข้าสู่ระบบ</button></a> 
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Essential javascripts for application to work-->
+  <script src="js/jquery-3.2.1.min.js"></script>
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/main.js"></script>
+  <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
+  <!-- The javascript plugin to display page loading on top-->
+  <!-- <script src="js/plugins/pace.min.js"></script> -->
+  <script type="text/javascript">
+    $('.login-content [data-toggle="flip"]').click(function () {
+      $('.login-box').toggleClass('flipped');
+      return false;
+    });
+    
+    if('<%= error %>' === 'ไม่ถูก'){
+      alert('ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง')
+    }else if('<%= error %>' === 'ไม่กรอกไอดี'){
+      alert('กรุณากรอกชื่อผู้ใช้งาน')
+    }else if('<%= error %>' === 'ไม่กรอกพาส'){
+      alert('กรุณากรอกรหัสผ่าน')
+    }
+
+    function resetPassword() {
+      console.log('this');
+      
+      $.ajax({
+        type: "post",
+        url: "http://localhost:4000/login/reset",
+        data: {
+          username: $('#resetusername').val(),
+          employee_citizen_id: $('#citizen').val()
+          
+        },
+        dataType: "json",
+        success: (res) => {
+          console.log(res.password);
+          $('#resetpassword').val(res.password)
+        }
+      })
+    }
+
+    var setname_status = () => {
+      var username = document.getElementById("username")
+      console.log(username.value);
+      
+      feedName(username.value);
+    }
+
+    
+  </script>
+</body>
+
+</html>
